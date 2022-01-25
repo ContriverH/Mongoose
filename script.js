@@ -21,21 +21,33 @@ async function run() {
     // user.name = "Shivam";
     // await user.save();
 
-    const user1 = await User.where("age")
-      .gt("21")
-      .where("name")
-      .equals("Shivam");
-    // .select("age");
-    user1[0].bestFriend = "61eff24b30b06a6ceb297ed5";
-    await user1[0].save();
+    // const user1 = await User.where("age")
+    //   .gt("21")
+    //   .where("name")
+    //   .equals("Shivam");
+    // // .select("age");
+    // user1[0].bestFriend = "61eff24b30b06a6ceb297ed5";
+    // await user1[0].save();
 
-    const user2 = await User.findById("61f01e571c9224aac3db54b5").populate(
-      "bestFriend"
-    );
-    console.log(user2);
+    // const user2 = await User.findById("61f01e571c9224aac3db54b5").populate(
+    //   "bestFriend"
+    // );
+    // console.log(user2);
+
+    const user3 = await User.findById("61f01e571c9224aac3db54b5");
+    user3.sayHi();
+    // console.log(user3);
+    // const users = await User.findByName("Himanshu");
+    // console.log(users);
+
+    // const queryUsers = await User.find().queryByName("Himanshu");
+    // console.log(queryUsers);
+
+    const userDetails = await User.findById("61f01e571c9224aac3db54b5");
+    console.log(userDetails.namedEmail);
   } catch (err) {
     console.log(err.message);
   }
 }
 
-// run();
+run();

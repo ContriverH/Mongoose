@@ -41,5 +41,21 @@ const userSchema = new mongoose.Schema({
   address: addressSchema,
 });
 
+userSchema.methods.sayHi = function () {
+  console.log(`Hi world! myself ${this.name}.`);
+};
+
+userSchema.statics.findByName = function (name) {
+  return this.where({ name: new RegExp(name, "i") }); // making the name case insensitive
+};
+
+userSchema.query.queryByName = function (name) {
+  return this.find({ name: new RegExp(name, "i") });
+};
+
+userSchema.virtual("namedEmail").get(function () {
+  return `${this.name} <${this.email}>`;
+});
+
 // Now for the model creation, you need to tell the mongoose to create a model based on this schema.
 module.exports = mongoose.model("User", userSchema);
