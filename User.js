@@ -33,7 +33,10 @@ const userSchema = new mongoose.Schema({
   },
   createdAt: Date,
   updateAt: Date,
-  bestFriend: mongoose.SchemaTypes.ObjectId,
+  bestFriend: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
+  },
   hobbies: [String],
   address: addressSchema,
 });
