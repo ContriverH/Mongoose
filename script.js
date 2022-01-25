@@ -34,8 +34,8 @@ async function run() {
     // );
     // console.log(user2);
 
-    const user3 = await User.findById("61f01e571c9224aac3db54b5");
-    user3.sayHi();
+    // const user3 = await User.findById("61f01e571c9224aac3db54b5");
+    // user3.sayHi();
     // console.log(user3);
     // const users = await User.findByName("Himanshu");
     // console.log(users);
@@ -43,8 +43,13 @@ async function run() {
     // const queryUsers = await User.find().queryByName("Himanshu");
     // console.log(queryUsers);
 
-    const userDetails = await User.findById("61f01e571c9224aac3db54b5");
-    console.log(userDetails.namedEmail);
+    // const userDetails = await User.findById("61f01e571c9224aac3db54b5");
+    // console.log(userDetails.namedEmail);
+
+    const userDetail = await User.findById("61f01e571c9224aac3db54b5");
+    console.log(userDetail.createdAt);
+    await userDetail.save();
+    console.log(userDetail.createdAt);
   } catch (err) {
     console.log(err.message);
   }

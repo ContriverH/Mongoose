@@ -23,7 +23,6 @@ const userSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    immutable: true,
     default: () => Date.now(),
   },
   email: {
@@ -31,8 +30,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     lowercase: true,
   },
-  createdAt: Date,
-  updateAt: Date,
+  updatedAt: Date,
   bestFriend: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
@@ -55,6 +53,17 @@ userSchema.query.queryByName = function (name) {
 
 userSchema.virtual("namedEmail").get(function () {
   return `${this.name} <${this.email}>`;
+});
+
+userSchema.pre("save", function (next) {
+  this.createdAt = Date.now();
+  // next();
+  throw new Error("Fail save");
+});
+
+userSchema.post("findOne", function (doc, next) {
+  doc.sayHi();
+  next();
 });
 
 // Now for the model creation, you need to tell the mongoose to create a model based on this schema.
